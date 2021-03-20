@@ -16,8 +16,8 @@ before_script:
 script:
   - docker --version # print the version for logging
   - docker build -t udagram-front-app .
-  - docker tag reverseproxy antonychinval/udagram-front-app:latest
+  - docker tag udagram-front-app antonychinval/udagram-front-app:latest
 
 after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker push antonychinval/reverseproxy
+  - docker push antonychinval/udagram-front-app
