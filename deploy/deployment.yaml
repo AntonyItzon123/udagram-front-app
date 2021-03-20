@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: udagram-front-app
+  labels:
+    app: udagram-front-app
+spec:
+  selector:
+    matchLabels:
+      app: udagram-front-app
+  template:
+    metadata:
+      labels:
+        app: udagram-front-app
+    spec:
+      containers:
+      - name: udagram-front
+        image: antonychinval/udagram-front-app
+        ports:
+        - containerPort: 8080
