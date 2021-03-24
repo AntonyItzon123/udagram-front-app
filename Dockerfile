@@ -1,20 +1,11 @@
-
-# Use NodeJS base image
-FROM node:13
-
-# Create app directory
+### STAGE 1: Build ###
+FROM node:12.7-alpine AS build
 WORKDIR /usr/src/app
-
-# Install app dependencies by copying
-# package.json and package-lock.json
-COPY package*.json ./
-
-# Install dependencies
+COPY package.json package-lock.json ./
 RUN npm install
-run npm install -g @angular/cli
-
-# Copy app source
 COPY . .
-
-# Define the Docker image's behavior at runtime
-CMD ["npm", "start"]
+RUN npm run build
+### STAGE 2: Run ###
+FROM nginx:1.17.1-alpine
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY --from=build /usr/src/app/www /usr/share/nginx/html
