@@ -16,3 +16,5 @@ spec:
       containers:
       - name: udagram-front-app
         image: antonychinval/udagram-front-app
+        ports:
+          - containerPort: 80
